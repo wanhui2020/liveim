@@ -1,0 +1,12 @@
+.layui-textarea{
+    min-height: 60px;
+}
+.layui-form-select .layui-input{
+    padding-right:0!important;
+}
+
+tbody .layui-table-cell {
+    height: inherit!important;
+    white-space:normal;
+
+}

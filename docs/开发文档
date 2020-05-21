@@ -1,0 +1,94 @@
+开发规范
+
+全局命令
+composer update //更新依赖
+php artisan list //显示命令列表
+php artisan make:migration create_depts_table//创建一个迁移。
+php artisan db:seed --class=CreateWeixinConfigTable
+php artisan migrate//执行所有的迁移。
+php artisan cache:clear//清除Laravel缓存文件
+php artisan queue:work运行队列进程
+php artisan event:generate
+supervisorctl update //队列更新
+
+开发: local
+测试: testing
+预上线: staging
+正式环境: production
+
+//小程序房间二维码地址
+https://room.cqyzb.cn/wechat/mini/qrcode?id=1
+
+路由签名
+https://laravel-china.org/topics/9404/laravel-56-new-function-routing-signature
+
+百度，face++，腾讯优图人工智能 API
+https://laravel-china.org/articles/7608/like-query-database-as-elegant-call-baidu-face-tencent-excellent-map-artificial-intelligence-api
+
+用户角色权限控制包 Laravel-permission
+https://laravel-china.org/articles/9842/user-role-permission-control-package-laravel-permission-usage-description
+
+Laravel 部署到阿里云 / 腾讯云
+https://laravel-china.org/articles/8983/laravel-deploys-to-the-ali-cloud-tencent-cloud
+
+
+composer dump-autoload
+php artisan vendor:publish
+laravel第三方组件
+maatwebsite/excel (已安装)
+overtrue/wechat(已安装)
+predis/predis(已安装)
+barryvdh/laravel-debugbar(已安装)
+laravel/passport(已安装)
+spatie/laravel-backup项目备份
+barryvdh/laravel-dompdf PDF工具https://github.com/barryvdh/laravel-dompdf
+barryvdh/laravel-cors
+php artisan passport:keys 部署
+
+php artisan make:request StoreBlogPost  //创建验证
+
+php artisan event:generate 生成监听事件类
+
+API_STANDARDS_TREE=vnd  # 公开的及商业项目用 vnd
+API_SUBTYPE=api-demo  # 项目简称
+API_PREFIX=api  # 前缀
+API_VERSION=v1  # 不提供版本时使用的版本号
+API_NAME="Laravel Api Demo"  # 使用 API Blueprint 命令生成文档的时候才用到
+API_STRICT=false # Strict 模式要求客户端发送 Accept 头而不是默认在配置文件中指定的版本，这意味着你不能通过Web浏览器浏览API
+API_DEFAULT_FORMAT=json
+API_DEBUG=true # 开启 debug 模式
+
+
+npm异常处理
+1、删除目录 rm -rf node_modules
+2、删除rm package-lock.json
+3、清理缓存 npm cache clean --fetch
+4、windows下进行安装npm install --no-bin-links
+
+laravel-echo-server start
+
+JS常用插件
+1、bootbox.js 弹框http://bootboxjs.com
+2、Jqurey select2 下拉框插件
+3、jqurey datatables 表格插件
+4、dropzone JavaScript 文件拖拽上传插件
+
+
+
+//迁移后的表-修改流程
+    1.修改原始迁移文件
+    2.新建迁移文件(只含有要修改的字段)，移动到指定文件夹
+    php artisan module:make-migration alter_platform_finance_statement_table platform
+    public function up()
+    {
+        Schema::table('platform_finance_statement', function ($table) {
+            $table->decimal('platform_total_money')->default(0.00)->comment('微信总收款');
+            $table->decimal('total_house_fee')->default(0.00)->comment('分时订单总房费');
+        });
+    }
+    3.运行指定文件夹的新的迁移文件
+    php artisan migrate   --path=/modules/Platform/Database/Migrations/alter
+    4.删除指定文件夹的新的迁移文件
+
+新增邀请人，是否开通邀请人
+开通邀请人享受邀请用户进行充值的10%返可提现金币 主播视频 语音 礼物
